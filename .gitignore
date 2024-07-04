@@ -1,0 +1,4 @@
+db.sqlite3
+Pipfile
+migrations/*
+__pycache__
