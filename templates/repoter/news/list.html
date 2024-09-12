@@ -1,0 +1,32 @@
+{% extends "repoter/news/base.html" %}
+
+
+{% block content %}
+<button class="btn btn-secondary mb-3 mr-0" style="float: right;"><a style="color:white; texxt-decoration: none;" href="{% url "add_news_by_repoter" %}">Add News</a></button>
+<table class="table">
+    <thead class="thead-dark" style="background-color: grey;">
+      <tr>
+        <th scope="col">S.N</th>
+        <th scope="col">News title</th>
+        <th scope="col">Category</th>
+        <th scope="col">Views</th>
+        <th scope="col">Image</th>
+        <th scope="col">Created Date</th>
+        <th scope="col">Updated Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for news in news %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td><a style="text-decoration: none; color: black;" href="{% url "updated_news_by_repoter" news.id %}">{{news.title|slice:":50"}}...</a></td>
+        <td>{{news.category.name}}</td>
+        <td>{{news.views_count}} view</td>
+        <td><img style="width: 100px;" src="{{news.image.url}}" alt="{{news.title}}"></td>
+        <td>{{news.created_date|date:"d b Y"}}</td>
+        <td>{{news.updated_date|date:"d b Y"}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

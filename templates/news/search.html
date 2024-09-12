@@ -1,0 +1,43 @@
+{% extends "partials/layout.html" %}
+
+{% block navbar %}
+{% include "partials/navbar.html" %}
+{% endblock navbar %}
+
+{% block banner %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section-title">
+          <span class="caption d-block small">Categories</span>
+          <h2>Politics</h2>
+        </div>
+        {% if search_data %}
+            {% for news in search_data %}
+            <div class="post-entry-2 d-flex">
+            <div class="thumbnail order-md-2" style="background-image: url('{{news.image.url}}')"></div>
+            <div class="contents order-md-1 pl-0">
+                <h2><a href="{% url "detailnews" news.id %}">{{news.title}}</a></h2>
+                <p class="mb-3">{{news.description|slice:":400"}}</p>
+                <div class="post-meta">
+                <span class="d-block"><a href="#">{{news.posted_by.first_name}} {{news.posted_by.last_name }}</a> | <a href="#">{{news.category.name}}</a></span>
+                <span class="date-read">{{news.created_date|date:"d b Y"}}</span>
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <p class="text-center" style="margin: 20% 0% 20% 0%; font-size: 25px;">Data not Found </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock banner %}
+
+{% block footer %}
+{% include "partials/footer.html" %}
+{% endblock footer %}
+
+{% block script %}
+{% include "partials/script.html" %}
+{% endblock script %}

@@ -1,0 +1,81 @@
+{% extends "partials/layout.html" %}
+
+{% block title %}Repoter Login Page{% endblock title %}
+
+{% block css %}
+<style>
+    .login-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        margin: 120px 0px 30px 500px;
+    }
+    .login-container h2 {
+        margin-bottom: 1rem;
+        color: #333;
+        text-align: center;
+    }
+    .login-container form {
+        display: flex;
+        flex-direction: column;
+    }
+    .login-container input {
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        width: 100%;
+    }
+    .login-container button {
+        padding: 0.75rem;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .login-container .forgot-password {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .login-container .forgot-password a {
+        color: #2575fc;
+        text-decoration: none;
+    }
+    .login-container .forgot-password a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock css %}
+
+{% block navbar %}
+{% include "partials/navbar.html" %}
+{% endblock navbar %}
+
+{% block trending %}
+<div class="login-container">
+    <h2>Login</h2>
+    <form method='post' action="{% url "login_page" %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter your username" required>
+        <input type="password" name="password" placeholder="Enter your password" required>
+        <button type="submit" style="background-color: grey; border: 2px solid grey;">Login</button>
+        <div class="forgot-password">
+            <a href="#">Forgot Password?</a>
+        </div>
+    </form>
+</div>
+{% endblock trending %}
+
+{% block footer %}
+{% include "partials/footer.html" %}
+{% endblock footer %}
+
+{% block script %}
+{% include "partials/script.html" %}
+{% endblock script %}

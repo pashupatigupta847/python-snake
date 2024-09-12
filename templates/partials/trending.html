@@ -1,0 +1,68 @@
+{% load static %}
+
+<div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-12">
+              <div class="section-title">
+                <h2>Editor's Pick</h2>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            {% for editor_pick in  editor_picks|slice:"0:1" %}
+            <div class="col-md-6">
+              <div class="post-entry-1">
+                <a href="post-single.html"><img src="{{editor_pick.image.url}}" alt="Image" class="img-fluid"></a>
+                <h2><a href="{% url "detailnews" editor_pick.id %}">{{editor_pick.title}}</a></h2>
+                <p>{{editor_pick.description|slice:"0:200"}}...</p>
+                <div class="post-meta">
+                  <span class="d-block"><a href="#">{{editor_pick.posted_by.first_name}} {{editor_pick.posted_by.last_name}}</a> | <a href="#">{{editor_pick.category.name}}</a></span>
+                  <span class="date-read">{{editor_pick.created_date|date:"d b Y"}}<span class="mx-1"></span>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            <div class="col-md-6">
+              {% for i in editor_picks|slice:"1:" %}
+              <div class="post-entry-2 d-flex bg-light">
+                <div class="thumbnail" style="background-image: url('{{i.image.url}}')"></div>
+                <div class="contents">
+                  <h2><a href="{% url "detailnews" i.id %}">{{i.title}}</a></h2>
+                  <div class="post-meta">
+                    <span class="d-block"><a href="#">{{i.posted_by.first_name}}{{i.posted_by.last_name}}</a> | <a href="#">{{i.category.name}}</a></span>
+                    <span class="date-read">{{i.created_date|date:"d b Y"}}<span class="mx-1"></span>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="section-title">
+            <h2>Trending</h2>
+          </div>
+
+          {% for news in trending_news %}
+          <div class="trend-entry d-flex">
+            <div class="number align-self-start">0{{forloop.counter}}</div>
+            <div class="trend-contents">
+              <h2><a href="{% url "detailnews" news.id %}">{{news.title}}</a></h2>
+              <div class="post-meta">
+                <span class="d-block"><a href="#">{{news.posted_by.first_name}} {{news.posted_by.last_name}}</a> | <a href="#">{{news.category.name}}</a></span>
+                <span class="date-read">{{ news.created_date|date:"D b Y"}}<span class="mx-1"></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <p>
+            <a href="#" class="more">See All Trends <span class="icon-keyboard_arrow_right"></span></a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>

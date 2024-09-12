@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="site-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          <div class="section-title">
+            <h2>Recent News</h2>
+          </div>
+          {% for rec_news in recent_news %}
+          <div class="post-entry-2 d-flex">
+            <div class="thumbnail order-md-2" style="background-image: url('{{rec_news.image.url}}')"></div>
+            <div class="contents order-md-1 pl-0">
+              <h2><a href="{% url "detailnews" rec_news.id %}">{{rec_news.title}}</a></h2>
+              <p class="mb-3">{{rec_news.description|slice:":200"}}</p>
+              <div class="post-meta">
+                <span class="d-block"><a href="#">{{rec_news.posted_by.first_name}}{{ rec_news.posted_by.last_name}}</a> in <a href="#">{{rec_news.category.name}}</a></span>
+                <span class="date-read">{{rec_news.created_date | date:"d b Y"}}<span class="mx-1"></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-lg-3">
+          <div class="section-title">
+            <h2>Popular Posts</h2>
+          </div>
+
+          {% for pop_news in popular_news %}
+          <div class="trend-entry d-flex">
+            <div class="number align-self-start">0{{forloop.counter}}</div>
+            <div class="trend-contents">
+              <h2><a href="{% url "detailnews" pop_news.id %}">{{pop_news.title}}</a></h2>
+              <div class="post-meta">
+                <span class="d-block"><a href="#">{{pop_news.posted_by.first_name}} {{pop_news.posted_by.last_name}}</a> | <a href="#">{{pop_news.category.name}}</a></span>
+                <span class="date-read">{{pop_news.created_date | date:"d b Y"}}<span class="mx-1"></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>

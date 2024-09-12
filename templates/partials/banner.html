@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="site-section py-0">
+    <div class="owl-carousel hero-slide owl-style">
+      {% for i in editorial %}
+      <div class="site-section">
+        <div class="container">
+          <div class="half-post-entry d-block d-lg-flex bg-light">
+            <div class="img-bg" style="background-image: url('{{i.image.url}}')"></div>
+            <div class="contents">
+              <span class="caption">Editor's Pick</span>
+              <h2><a href="{% url "detailnews" i.id %}">{{i.title}}</a></h2>
+              <p class="mb-3">{{i.description|slice:":350" }}...</p>
+              
+              <div class="post-meta">
+                <span class="d-block"><a href="#">{{i.posted_by.first_name}} {{i.posted_by.last_name}}</a></span>
+                <span class="date-read">{{i.created_date| date:"d b Y"}} <span class="mx-1"></span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
